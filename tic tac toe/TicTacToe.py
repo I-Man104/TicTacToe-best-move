@@ -99,27 +99,27 @@ class TicTacToe:
 
     def maximize(self, board_key, depth, player, memo):
         bestValue = -float('inf')
-        bestDepth = depth
+        bestDepth = 0
         for move in self.availableMoves():
             self.makeMove(move, "O")
             value, returned_depth = self.minimax(depth - 1, False, player, memo)
             self.makeMove(move, " ")
             bestValue = max(bestValue, value)
-            bestDepth = max(bestDepth, depth)
+            bestDepth = max(bestDepth, returned_depth)
         memo[(board_key)] = bestValue
-        return bestValue, returned_depth
+        return bestValue, bestDepth
 
     def minimize(self, board_key, depth, player, memo):
         bestValue = float('inf')
-        bestDepth = depth
+        bestDepth = 9
         for move in self.availableMoves():
             self.makeMove(move, "X")
             value, returned_depth = self.minimax(depth - 1, True, player, memo)
             self.makeMove(move, " ")
             bestValue = min(bestValue, value)
-            bestDepth = max(bestDepth, depth)
+            bestDepth = min(bestDepth, returned_depth) 
         memo[(board_key)] = bestValue
-        return bestValue, returned_depth
+        return bestValue, bestDepth
 
     def minimax(self, depth, is_maximizing, player, memo={}):
         board_key = tuple(self.board)
