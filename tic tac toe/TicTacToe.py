@@ -106,7 +106,7 @@ class TicTacToe:
             self.makeMove(move, " ")
             bestValue = max(bestValue, returned_value)
             bestDepth = max(bestDepth, returned_depth)
-        memo[(board_key)] = bestValue
+        memo[(board_key)] = bestValue, bestDepth
         return bestValue, bestDepth
 
     def minimize(self, board_key, depth, player, memo):
@@ -118,13 +118,13 @@ class TicTacToe:
             self.makeMove(move, " ")
             bestValue = min(bestValue, returned_value)
             bestDepth = min(bestDepth, returned_depth) 
-        memo[(board_key)] = bestValue
+        memo[(board_key)] = bestValue, bestDepth
         return bestValue, bestDepth
 
     def minimax(self, depth, is_maximizing, player, memo={}):
         board_key = tuple(self.board)
         if (board_key) in memo:
-            return memo[(board_key)], depth
+            return memo[(board_key)]
 
         if depth == 0 or self.gameOver():
             return self.evaluate(player), depth

@@ -1,5 +1,5 @@
 from TicTacToe import TicTacToe
-from game_logic import choosePlayer, playerMove, aiMove
+from game_logic import choosePlayer, playerMove, aiMove, changePlayer
 
 def playGame():
     memo = {}
@@ -8,21 +8,21 @@ def playGame():
 
     player = choosePlayer()
     
-    depth = 8
-    ai_player = 'O' if player == 'X' else 'X'
+    depth = 9
+    ai_player = changePlayer(player)
     while not game.gameOver():
         if player == 'X':
             playerMove(game, player)
-            if game.gameOver():
-                break
             depth -= 1
+            if depth == 0 or game.gameOver():
+                break
             aiMove(game, depth, ai_player, memo)
             depth -= 1
         else:
             aiMove(game, depth,ai_player, memo)
-            if game.gameOver():
-                break
             depth -= 1
+            if depth == 0 or game.gameOver():
+                break
             playerMove(game, player)
             depth -= 1
 
