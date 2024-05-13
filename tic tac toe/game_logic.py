@@ -14,7 +14,7 @@ def make_best_move(board, depth, player, memo):
         board.makeMove(move, player)
         value, returned_depth = board.minimax(depth, False, player, memo)
         board.makeMove(move, " ")
-        print(returned_depth)
+        # print(returned_depth)
         if value > bestValue:
             bestValue = value
             bestMove = move

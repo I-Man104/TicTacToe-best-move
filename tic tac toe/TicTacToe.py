@@ -102,9 +102,9 @@ class TicTacToe:
         bestDepth = 0
         for move in self.availableMoves():
             self.makeMove(move, "O")
-            value, returned_depth = self.minimax(depth - 1, False, player, memo)
+            returned_value, returned_depth = self.minimax(depth - 1, False, player, memo)
             self.makeMove(move, " ")
-            bestValue = max(bestValue, value)
+            bestValue = max(bestValue, returned_value)
             bestDepth = max(bestDepth, returned_depth)
         memo[(board_key)] = bestValue
         return bestValue, bestDepth
@@ -114,9 +114,9 @@ class TicTacToe:
         bestDepth = 9
         for move in self.availableMoves():
             self.makeMove(move, "X")
-            value, returned_depth = self.minimax(depth - 1, True, player, memo)
+            returned_value, returned_depth = self.minimax(depth - 1, True, player, memo)
             self.makeMove(move, " ")
-            bestValue = min(bestValue, value)
+            bestValue = min(bestValue, returned_value)
             bestDepth = min(bestDepth, returned_depth) 
         memo[(board_key)] = bestValue
         return bestValue, bestDepth
